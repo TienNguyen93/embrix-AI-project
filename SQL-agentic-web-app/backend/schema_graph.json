@@ -1,0 +1,908 @@
+{
+    "directed": true,
+    "multigraph": false,
+    "graph": {
+        "node_default": {},
+        "edge_default": {}
+    },
+    "nodes": [
+        {
+            "columns": [
+                {
+                    "name": "recordid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "id",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "detail",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "batchid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "a_party_number",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "b_party_number",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "startdate",
+                    "type": "TIMESTAMP"
+                },
+                {
+                    "name": "enddate",
+                    "type": "TIMESTAMP"
+                },
+                {
+                    "name": "incoming_route",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "outgoing_route",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "id_cliente",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "id_cuenta",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "tipo_llamada",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "n_tarifa",
+                    "type": "NUMERIC(15, 6)"
+                },
+                {
+                    "name": "s_status",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "n_id_ciclo",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "d_fecha_corte",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "ext_duration_minutes",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "ext_duration_seconds",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "ext_conferencias",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "call_id_number",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "n_id_operador",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "ext_id_cinta",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "a_party_category",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "s_usernumber",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "s_department",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "s_authorizationcode",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "s_group",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "s_userid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "s_ciudad",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "servicetype",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "usageid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "usagetype",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "aggregatedusageid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "recordindicator",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "status",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "serviceunitid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "accountid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "fileid",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "sdurationtime",
+                    "type": "TIMESTAMP"
+                },
+                {
+                    "name": "failurecode",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "disconnectreason",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "callstatus",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "terminating_access",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "ext_n_idd_abc",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "ext_n_ido_bcd",
+                    "type": "VARCHAR(255)"
+                }
+            ],
+            "table_name": "raw_voice_local_detail_record",
+            "id": "raw_voice_local_detail_record"
+        },
+        {
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "VARCHAR(100)"
+                },
+                {
+                    "name": "filename",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "operator",
+                    "type": "VARCHAR(25)"
+                },
+                {
+                    "name": "processdate",
+                    "type": "DATE"
+                },
+                {
+                    "name": "num_records",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "filepath",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "status",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "createddate",
+                    "type": "DATE"
+                },
+                {
+                    "name": "modifieddate",
+                    "type": "DATE"
+                },
+                {
+                    "name": "disputefilename",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "disputeid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "invoicefilename",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "invoiceid",
+                    "type": "VARCHAR(255)"
+                }
+            ],
+            "table_name": "tenant_operator_record",
+            "id": "tenant_operator_record"
+        },
+        {
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "recordid",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "type",
+                    "type": "VARCHAR(100)"
+                },
+                {
+                    "name": "usageid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "startdate",
+                    "type": "TIMESTAMP"
+                },
+                {
+                    "name": "enddate",
+                    "type": "TIMESTAMP"
+                },
+                {
+                    "name": "accountid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "serviceunitid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "provisioningid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "quantity",
+                    "type": "NUMERIC(22, 6)"
+                },
+                {
+                    "name": "quantityunit",
+                    "type": "VARCHAR(50)"
+                },
+                {
+                    "name": "usagetype",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "usageclass",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "servicetype",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "recordindicator",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "itemid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "status",
+                    "type": "VARCHAR(100)"
+                },
+                {
+                    "name": "batchid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "perfbatchid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "apartynumber",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "bpartynumber",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "cpartynumber",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "fileid",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "direction",
+                    "type": "VARCHAR(255)"
+                }
+            ],
+            "table_name": "raw_sms_detail_record",
+            "id": "raw_sms_detail_record"
+        },
+        {
+            "columns": [
+                {
+                    "name": "accountid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "servicetype",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "noofsms",
+                    "type": "NUMERIC(22, 6)"
+                },
+                {
+                    "name": "charge",
+                    "type": "NUMERIC(22, 6)"
+                },
+                {
+                    "name": "startdate",
+                    "type": "TIMESTAMP"
+                },
+                {
+                    "name": "enddate",
+                    "type": "TIMESTAMP"
+                },
+                {
+                    "name": "createddate",
+                    "type": "TIMESTAMP"
+                }
+            ],
+            "table_name": "sms_aggregation_by_accountid",
+            "id": "sms_aggregation_by_accountid"
+        },
+        {
+            "columns": [
+                {
+                    "name": "accountid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "serviceunitid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "servicetype",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "readingvalue",
+                    "type": "NUMERIC(15, 6)"
+                },
+                {
+                    "name": "latestreadingdate",
+                    "type": "TIMESTAMP"
+                },
+                {
+                    "name": "provisioningid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "index",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "usageid",
+                    "type": "VARCHAR(255)"
+                }
+            ],
+            "table_name": "service_usage_readings",
+            "id": "service_usage_readings"
+        },
+        {
+            "columns": [
+                {
+                    "name": "recordid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "id",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "batchid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "type",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "submit_date",
+                    "type": "TIMESTAMP"
+                },
+                {
+                    "name": "message_id",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "newsequencenumber",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "commandid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "commandlength",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "servicetype",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "addr_src_digits",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "sourceton",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "sourcenpi",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "addr_dst_digits",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "destton",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "destnpi",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "sheduledeliverytime",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "validityperiod",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "protocolid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "priority",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "registerdelivery",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "replaceifpresent",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "datacoding",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "messagelength",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "first_20_characters_of_sms",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "opttag",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "optlength",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "optval",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "orig_network_id",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "network_id",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "host",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "esmclass",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "gsmsiei",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "gsmsudh",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "message_delivery_status",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "ext_id_cinta",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "id_cliente",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "id_cuenta",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "n_id_operador",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "n_tarifa_operador",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "servicetype_1",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "quantity",
+                    "type": "NUMERIC(22, 6)"
+                },
+                {
+                    "name": "createddate",
+                    "type": "TIMESTAMP"
+                },
+                {
+                    "name": "filename",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "usageid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "aggregatedusageid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "recordindicator",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "usagetype",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "status",
+                    "type": "VARCHAR(100)"
+                },
+                {
+                    "name": "serviceunitid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "accountid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "fileid",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "direction",
+                    "type": "VARCHAR(255)"
+                }
+            ],
+            "table_name": "raw_interconexion_sms_usage_records",
+            "id": "raw_interconexion_sms_usage_records"
+        },
+        {
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "VARCHAR(100)"
+                },
+                {
+                    "name": "index",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "reg_id",
+                    "type": "VARCHAR(25)"
+                },
+                {
+                    "name": "nir",
+                    "type": "VARCHAR(25)"
+                },
+                {
+                    "name": "recorddate",
+                    "type": "DATE"
+                },
+                {
+                    "name": "traffictype",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "destseries",
+                    "type": "VARCHAR(100)"
+                },
+                {
+                    "name": "numcalls",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "num_seconds",
+                    "type": "NUMERIC(15, 2)"
+                },
+                {
+                    "name": "billedrate",
+                    "type": "NUMERIC(15, 6)"
+                },
+                {
+                    "name": "origseries",
+                    "type": "VARCHAR(100)"
+                },
+                {
+                    "name": "nim",
+                    "type": "VARCHAR(10)"
+                },
+                {
+                    "name": "calltype",
+                    "type": "VARCHAR(100)"
+                },
+                {
+                    "name": "pdic",
+                    "type": "VARCHAR(25)"
+                },
+                {
+                    "name": "acctid",
+                    "type": "VARCHAR(100)"
+                },
+                {
+                    "name": "numregcalls",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "num_regseconds",
+                    "type": "NUMERIC(15, 6)"
+                },
+                {
+                    "name": "recograte",
+                    "type": "NUMERIC(15, 6)"
+                },
+                {
+                    "name": "tenantnumregcalls",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "tenantnumregseconds",
+                    "type": "NUMERIC(15, 6)"
+                },
+                {
+                    "name": "tenantrecograte",
+                    "type": "NUMERIC(15, 6)"
+                },
+                {
+                    "name": "diffcalls",
+                    "type": "INTEGER"
+                }
+            ],
+            "table_name": "operator_dispute_list",
+            "id": "operator_dispute_list"
+        },
+        {
+            "columns": [
+                {
+                    "name": "filename",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "batchid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "perfbatchid",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "servicetype",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "totalreccount",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "successreccount",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "failurereccount",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "suspendedreccount",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "createddate",
+                    "type": "TIMESTAMP"
+                }
+            ],
+            "table_name": "usage_process_stats",
+            "id": "usage_process_stats"
+        },
+        {
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "VARCHAR(100)"
+                },
+                {
+                    "name": "index",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "reg_id",
+                    "type": "VARCHAR(25)"
+                },
+                {
+                    "name": "nir",
+                    "type": "VARCHAR(25)"
+                },
+                {
+                    "name": "recorddate",
+                    "type": "DATE"
+                },
+                {
+                    "name": "traffictype",
+                    "type": "VARCHAR(255)"
+                },
+                {
+                    "name": "destseries",
+                    "type": "VARCHAR(100)"
+                },
+                {
+                    "name": "numcalls",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "num_seconds",
+                    "type": "NUMERIC(15, 2)"
+                },
+                {
+                    "name": "billedrate",
+                    "type": "NUMERIC(15, 6)"
+                },
+                {
+                    "name": "origseries",
+                    "type": "VARCHAR(100)"
+                },
+                {
+                    "name": "nim",
+                    "type": "VARCHAR(10)"
+                },
+                {
+                    "name": "calltype",
+                    "type": "VARCHAR(100)"
+                },
+                {
+                    "name": "pdic",
+                    "type": "VARCHAR(25)"
+                },
+                {
+                    "name": "acctid",
+                    "type": "VARCHAR(100)"
+                },
+                {
+                    "name": "numregcalls",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "num_regseconds",
+                    "type": "NUMERIC(15, 6)"
+                },
+                {
+                    "name": "recograte",
+                    "type": "NUMERIC(15, 6)"
+                }
+            ],
+            "table_name": "tenant_operator_dispute_list",
+            "id": "tenant_operator_dispute_list"
+        }
+    ],
+    "edges": [
+        {
+            "source_column": "n_id_operador",
+            "target_column": "operator",
+            "source": "raw_voice_local_detail_record",
+            "target": "tenant_operator_record"
+        },
+        {
+            "source_column": "accountid",
+            "target_column": "accountid",
+            "source": "raw_sms_detail_record",
+            "target": "sms_aggregation_by_accountid"
+        },
+        {
+            "source_column": "serviceunitid",
+            "target_column": "serviceunitid",
+            "source": "raw_sms_detail_record",
+            "target": "usage_process_stats"
+        },
+        {
+            "source_column": "usageid",
+            "target_column": "usageid",
+            "source": "service_usage_readings",
+            "target": "raw_sms_detail_record"
+        },
+        {
+            "source_column": "usageid",
+            "target_column": "usageid",
+            "source": "raw_interconexion_sms_usage_records",
+            "target": "service_usage_readings"
+        },
+        {
+            "source_column": "acctid",
+            "target_column": "invoiceid",
+            "source": "operator_dispute_list",
+            "target": "tenant_operator_record"
+        },
+        {
+            "source_column": "acctid",
+            "target_column": "invoiceid",
+            "source": "tenant_operator_dispute_list",
+            "target": "tenant_operator_record"
+        }
+    ]
+}

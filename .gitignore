@@ -1,0 +1,34 @@
+# Environments
+venv/
+env/
+.venv/
+.env
+SQL-agentic-web-app/.env
+Embrix-AI-agent/.env
+
+# Python Caches & Compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.sqlite
+*.sqlite3
+
+# Node Dependencies & Builds
+node_modules/
+**/node_modules/
+**/dist/
+**/build/
+
+# Vector Stores & Database Cache Files
+chroma_db/
+**/chroma_db/
+*.log
+
+# IDE & OS Specific
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Agent state
+.agents/
