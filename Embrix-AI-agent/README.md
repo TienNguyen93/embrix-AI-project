@@ -1,14 +1,15 @@
 # Embrix AI Agent (SQL Agent & RAG Core)
 
-The **Embrix-AI-agent** directory contains the core engine for schema introspection, metadata storage, targeted vector retrieval (RAG), execution-based SQL validation (Query Auditor), and automated schema drift synchronization between **Antigravity** and the **Embrix** PostgreSQL database.
+The **Embrix-AI-agent** directory contains the core engine for schema introspection, metadata storage, targeted vector retrieval (RAG), execution-based SQL validation (Query Auditor), and automated schema drift synchronization between **Antigravity / VSCode / Codex** and the **Embrix** PostgreSQL database.
 
 ---
 
-## Folder Structure
+## Cleaned Folder Structure
 
 ```
 Embrix-AI-agent/
 ├── embrix/                         # Python package for schema store, agents & RAG
+│   ├── cli.py                      # Unified 1-shot CLI query engine & token estimator
 │   ├── agents/
 │   │   └── query_auditor.py        # EXPLAIN dry-run auditor & self-correction retry loop
 │   └── schema_store/
@@ -21,101 +22,92 @@ Embrix-AI-agent/
 │   ├── enrich_schema_descriptions.py  # LLM-based column/table description generator
 │   └── fast_enrich_all.py             # Heuristic snapshot description generator
 ├── chroma_db/                      # ChromaDB persistent vector database directory
-├── schema_snapshot.json            # Persisted JSON schema metadata store
-├── architecture.md                 # System architecture overview & Mermaid diagram
+├── schema_snapshot.json            # Persisted JSON schema metadata store (1013 tables)
 ├── nl2sql_validation_plan.md       # Implementation blueprint for Schema Store & Auditor
 ├── schema_drift_workflow.md        # 3-trigger schema drift synchronization spec
-├── sample_questions.md             # Curated benchmark business questions & SQL queries
-├── flow_diagram.png                # Architecture flow diagram
-├── fast-test.py                    # Direct PostgreSQL connection verification script
 ├── .env & .env.template            # Environment variables configuration
 └── README.md                       # Setup and running instructions for Embrix AI Agent
 ```
 
 ---
 
-## Setup & Prerequisites
+## Model & Execution Prerequisites
 
-1. **Python Environment**:
-   Activate the project virtual environment:
-   ```bash
-   # On Git Bash:
-   source ../venv/Scripts/activate
+Depending on how you intend to run queries, review the prerequisites below:
 
-   # On PowerShell:
-   ..\venv\Scripts\Activate.ps1
-   ```
+### 🤖 1. For AI Chat Mode (VS Code, Antigravity, Codex)
+- **Zero Local Model Setup Required!**
+- The AI Assistant automatically uses its built-in cloud LLM (Gemini 3.6 Flash / Pro) in-memory to inspect `schema_snapshot.json`, generate SQL queries, and audit execution without requiring local Ollama setup or writing temporary `.py` files.
 
-2. **Dependencies**:
-   Ensure required packages are installed:
-   ```bash
-   pip install sqlalchemy psycopg2-binary chromadb pydantic python-dotenv apscheduler
-   ```
-
-3. **Ollama Models**:
-   Ensure Ollama is running locally with `nomic-embed-text` and `qwen3:8b` (or `llama3.1`):
-   ```bash
-   ollama pull nomic-embed-text
-   ollama pull qwen3:8b
-   ```
+### 💻 2. For Local Terminal CLI Mode (`python -m embrix.cli`)
+- Requires [Ollama](https://ollama.com/) running locally with **`qwen3.5`** (for SQL generation) and **`nomic-embed-text`** (for ChromaDB vector embeddings):
+  ```bash
+  ollama pull qwen3.5
+  ollama pull nomic-embed-text
+  ```
 
 ---
 
-## Workflow & Operations
+## Post-Clone Setup
 
-### 1. Schema Introspection & Snapshot Generation
-Inspect live PostgreSQL database schemas and build the initial `schema_snapshot.json`:
+### Step 1: Create & Activate Virtual Environment
+Before installing dependencies, **create and activate a Python virtual environment**:
+
 ```bash
-python -m embrix.schema_store.introspect
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# On Git Bash:
+source venv/Scripts/activate
+
+# On PowerShell:
+.\venv\Scripts\Activate.ps1
 ```
 
-### 2. Schema Description Enrichment
-Generate table and column business descriptions for un-described snapshot entities:
+### Step 2: Install Dependencies
 ```bash
-# Heuristic fast enrichment
-python scripts/fast_enrich_all.py
-
-# LLM-powered enrichment (Ollama)
-python scripts/enrich_schema_descriptions.py [--force]
+pip install sqlalchemy psycopg2-binary chromadb pydantic python-dotenv pandas tabulate
 ```
 
-### 3. ChromaDB Vector Indexing & Targeted RAG Retrieval
-Sync `schema_snapshot.json` entities into ChromaDB for vector retrieval with 1-hop Foreign Key expansion:
-```python
-from embrix.schema_store.retrieval import SchemaRetriever
-
-retriever = SchemaRetriever()
-retriever.sync_index()
-
-# Retrieve relevant table metadata for a query
-tables = retriever.retrieve_relevant_tables("Show daily usage trends by service type", top_k=5)
-```
-
-### 4. Query Validation & Self-Correction (Query Auditor)
-Validate generated SQL queries against the live database catalog using dry-run `EXPLAIN` planning:
-```python
-from embrix.agents.query_auditor import execute_and_validate_with_retry
-
-# Validates and retries if EXPLAIN encounters syntax/schema errors
-result = execute_and_validate_with_retry(
-    question="Total volume by account",
-    engine=engine,
-    generate_sql_fn=my_sql_generator_function
-)
-```
-
-### 5. Schema Drift Detection & Auto-Sync
-Detect schema changes (added/removed tables, column type alterations) and automatically resync the metadata store:
+### Step 3: One-Time Initialization Task
+Run the initialization task once after creating and activating the virtual environment:
 ```bash
-# Run drift check manually
+python -m embrix.cli --init
+```
+
+---
+
+## Schema Drift & Synchronization (`schema_drift_workflow.md`)
+
+### When to Use Schema Drift Sync:
+When the live PostgreSQL database schema changes (e.g., new tables added, columns modified, data types altered), `schema_snapshot.json` and ChromaDB embeddings must be resynced so queries don't generate outdated SQL.
+
+### How to Use Schema Drift Sync:
+
+#### 1. Manual On-Demand Resync (Terminal)
+Run the drift detector directly to compare `schema_snapshot.json` with PostgreSQL catalog:
+```bash
 python -m embrix.schema_store.drift_sync
 ```
 
+#### 2. Automated Server Triggers (Reference: `schema_drift_workflow.md`)
+Refer to **[`schema_drift_workflow.md`](file:///C:/Users/nguye/Documents/antigravity/keen-einstein/Embrix-AI-agent/schema_drift_workflow.md)** for integrating automatic drift checking in long-running services:
+- **Startup Trigger**: Checks schema drift once at server launch before serving user requests.
+- **Scheduled Trigger**: Runs periodically (e.g., hourly via `APScheduler`) during background operation.
+- **Reactive Trigger**: Fires automatically if `QueryAuditor` detects 2+ `EXPLAIN` query failures on the same table within 5 minutes.
+
 ---
 
-## Technical Documentation Reference
+## Asking Database Questions
 
-- **[architecture.md](file:///C:/Users/nguye/Documents/antigravity/keen-einstein/Embrix-AI-agent/architecture.md)**: Multi-agent flow diagram, module descriptions, and system integration details.
-- **[nl2sql_validation_plan.md](file:///C:/Users/nguye/Documents/antigravity/keen-einstein/Embrix-AI-agent/nl2sql_validation_plan.md)**: Architectural phase specifications for Schema Store, Retrieval RAG, Query Auditor, and Drift handling.
-- **[schema_drift_workflow.md](file:///C:/Users/nguye/Documents/antigravity/keen-einstein/Embrix-AI-agent/schema_drift_workflow.md)**: Detailed configuration for Startup, Scheduled, and Reactive drift triggers.
-- **[sample_questions.md](file:///C:/Users/nguye/Documents/antigravity/keen-einstein/Embrix-AI-agent/sample_questions.md)**: Reference NL questions and benchmark SQL queries across analytics domain dashboards.
+Once initialized, ask any natural language question via terminal:
+```bash
+python -m embrix.cli "What are the unpaid invoices by country?"
+```
+
+Or ask the AI Assistant directly in chat without granting file creation permissions:
+The assistant will immediately respond with:
+- 💻 **Generated SQL Query**
+- 📊 **Query Execution Results Table**
+- 🔢 **Token Usage & Cost Calculation**

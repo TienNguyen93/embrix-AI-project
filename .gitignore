@@ -32,6 +32,34 @@ Thumbs.db
 
 # Agent state
 .agents/
-SQL-agentic-web-app/architecture.md
-SQL-agentic-web-app/flow_diagram.png
-SQL-agentic-web-app/sample_questions.md
+# Documentation & Diagrams
+architecture.md
+flow_diagram.png
+sample_questions.md
+
+SQL-agentic-web-app/
+
+# Embrix-AI-agent generated SQL/scratch scripts
+Embrix-AI-agent/detailed_schema_lookup.py
+Embrix-AI-agent/execute_query.py
+Embrix-AI-agent/fast-test.py
+Embrix-AI-agent/find_financial_tables.py
+Embrix-AI-agent/get_revenue_breakdown.py
+Embrix-AI-agent/get_summary.py
+Embrix-AI-agent/get_unpaid_invoices.py
+Embrix-AI-agent/inspect_schema.py
+Embrix-AI-agent/inspect_table.py
+Embrix-AI-agent/inspect_tables_detail.py
+Embrix-AI-agent/inspect_target_tables.py
+Embrix-AI-agent/query_account_financials.py
+Embrix-AI-agent/search_account_financials.py
+Embrix-AI-agent/search_revenue_country.py
+Embrix-AI-agent/test_revenue_country.py
+Embrix-AI-agent/query_revenue_items.py
+Embrix-AI-agent/query_service_types.py
+Embrix-AI-agent/query_services_all_countries.py
+Embrix-AI-agent/search_service_type_country.py
+Embrix-AI-agent/test_service_type_country.py
+Embrix-AI-agent/search_customer_country.py
+
+miscel.md
