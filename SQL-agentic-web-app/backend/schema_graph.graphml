@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d1" for="edge" attr.name="target_column" attr.type="string" />
+  <key id="d0" for="edge" attr.name="source_column" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="raw_voice_local_detail_record" />
+    <node id="tenant_operator_record" />
+    <node id="raw_sms_detail_record" />
+    <node id="sms_aggregation_by_accountid" />
+    <node id="service_usage_readings" />
+    <node id="raw_interconexion_sms_usage_records" />
+    <node id="operator_dispute_list" />
+    <node id="usage_process_stats" />
+    <node id="tenant_operator_dispute_list" />
+    <edge source="raw_voice_local_detail_record" target="tenant_operator_record">
+      <data key="d0">n_id_operador</data>
+      <data key="d1">operator</data>
+    </edge>
+    <edge source="raw_sms_detail_record" target="sms_aggregation_by_accountid">
+      <data key="d0">accountid</data>
+      <data key="d1">accountid</data>
+    </edge>
+    <edge source="raw_sms_detail_record" target="usage_process_stats">
+      <data key="d0">serviceunitid</data>
+      <data key="d1">serviceunitid</data>
+    </edge>
+    <edge source="service_usage_readings" target="raw_sms_detail_record">
+      <data key="d0">usageid</data>
+      <data key="d1">usageid</data>
+    </edge>
+    <edge source="raw_interconexion_sms_usage_records" target="service_usage_readings">
+      <data key="d0">usageid</data>
+      <data key="d1">usageid</data>
+    </edge>
+    <edge source="operator_dispute_list" target="tenant_operator_record">
+      <data key="d0">acctid</data>
+      <data key="d1">invoiceid</data>
+    </edge>
+    <edge source="tenant_operator_dispute_list" target="tenant_operator_record">
+      <data key="d0">acctid</data>
+      <data key="d1">invoiceid</data>
+    </edge>
+  </graph>
+</graphml>
