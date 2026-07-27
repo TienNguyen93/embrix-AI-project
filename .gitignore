@@ -32,3 +32,6 @@ Thumbs.db
 
 # Agent state
 .agents/
+SQL-agentic-web-app/architecture.md
+SQL-agentic-web-app/flow_diagram.png
+SQL-agentic-web-app/sample_questions.md
