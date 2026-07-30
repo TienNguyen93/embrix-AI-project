@@ -14,9 +14,10 @@ agent-app/
 ├── test_api.py                 # Integration Unit Tests for REST API Endpoints
 ├── .env.example                # Configuration & Free Tier API Quota Template
 ├── schema_snapshot.json        # Pre-cached Schema Metadata Snapshot (1,013 Tables)
-├── WALKTHROUGH.md              # Beginner System Walkthrough & Architecture Guide
-├── RATE_LIMITER_EXPLANATION.md # Detailed Sliding Window Rate Limiter Mechanics
-├── RAG_EVALUATION_EXPLANATION.md # RAG Benchmark Evaluation Suite & Formulas
+├── documentation/              # All documentation organized in a dedicated folder
+   ├── WALKTHROUGH.md          # Beginner System Walkthrough & Architecture Guide
+   ├── RATE_LIMITER_EXPLANATION.md # Detailed Sliding Window Rate Limiter Mechanics
+   ├── RAG_EVALUATION_EXPLANATION.md # RAG Benchmark Evaluation Suite & Formulas
 └── embrix/
     ├── agents/                 # Security Auditor & EXPLAIN Validation
     │   └── query_auditor.py    # Read-Only Enforcement & EXPLAIN Retry Loop
@@ -138,6 +139,6 @@ npm run dev
 ---
 
 ## 📄 Detailed Markdown Technical Guides
-- **[WALKTHROUGH.md](agent-app/WALKTHROUGH.md)**: Beginner step-by-step system walkthrough and data flow.
-- **[RATE_LIMITER_EXPLANATION.md](agent-app/RATE_LIMITER_EXPLANATION.md)**: Deep-dive technical explanation of the multi-quota Sliding Window Log algorithm.
-- **[RAG_EVALUATION_EXPLANATION.md](agent-app/RAG_EVALUATION_EXPLANATION.md)**: Architectural guide for Recall@K, Precision@K, MRR, and EXPLAIN pass rate metrics.
+- **[WALKTHROUGH.md](documentation/WALKTHROUGH.md)**: Beginner step-by-step system walkthrough and data flow.
+- **[RATE_LIMITER_EXPLANATION.md](documentation/RATE_LIMITER_EXPLANATION.md)**: Deep-dive technical explanation of the multi-quota Sliding Window Log algorithm.
+- **[RAG_EVALUATION_EXPLANATION.md](documentation/RAG_EVALUATION_EXPLANATION.md)**: Architectural guide for Recall@K, Precision@K, MRR, and EXPLAIN pass rate metrics.
