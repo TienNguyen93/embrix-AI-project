@@ -9,7 +9,8 @@ After cloning the repository (in VS Code, Codex, Antigravity, or Cursor):
    ```bash
    python -m venv venv
    source venv/Scripts/activate  # Git Bash
-   pip install sqlalchemy psycopg2-binary chromadb pydantic python-dotenv pandas tabulate
+   pip install sqlalchemy psycopg2-binary pydantic python-dotenv pandas tabulate
+
    ```
 
 2. **One-Time Initialization Task**:

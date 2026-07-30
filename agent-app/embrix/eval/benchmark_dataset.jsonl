@@ -1,0 +1,20 @@
+{"id": 1, "question": "Show service usage readings by date and service type", "expected_tables": ["core_usage.service_usage_readings", "core_backup.coopeg_services"], "domain": "core_usage"}
+{"id": 2, "question": "What is the total invoice billing revenue by country?", "expected_tables": ["core_backup.coopeg_invoice_summary", "core_backup.coopeg_invoice"], "domain": "core_engine"}
+{"id": 3, "question": "List top 10 accounts by active service usage volume", "expected_tables": ["core_backup.coopeg_services_unique_accounts", "core_backup.coopeg_services"], "domain": "core_usage"}
+{"id": 4, "question": "Show unpaid customer invoices and billing balances", "expected_tables": ["core_backup.coopeg_invoice_summary", "core_backup.coopeg_balance_data"], "domain": "core_engine"}
+{"id": 5, "question": "Retrieve meter electricity consumption telemetry logs", "expected_tables": ["core_backup.coopeg_dummy_internet_services", "core_usage.service_usage_readings"], "domain": "core_usage"}
+{"id": 6, "question": "What are the revenue sharing entries and GL journal allocations?", "expected_tables": ["core_backup.revenue_journal_tmp"], "domain": "core_revenue"}
+{"id": 7, "question": "Find order items and product subscriptions by customer account", "expected_tables": ["core_backup.coopeg_services", "core_backup.coopeg_service_provision"], "domain": "core_oms"}
+{"id": 8, "question": "Show pricing rules and discount tariffs", "expected_tables": ["core_backup.coopeg_services"], "domain": "core_pricing"}
+{"id": 9, "question": "Retrieve carrier interconexion raw usage CDR files", "expected_tables": ["core_backup.coopeg_interc_fiber_emp_services"], "domain": "core_mediation"}
+{"id": 10, "question": "What are the chart of accounts and GL account ranges?", "expected_tables": ["core_config.account_type_department_map"], "domain": "core_config"}
+{"id": 11, "question": "Show billing proration adjustments and rating errors", "expected_tables": ["core_backup.coopeg_inv_validate", "core_backup.coopeg_invoice_summary"], "domain": "core_usage"}
+{"id": 12, "question": "List payment installments and customer tax details", "expected_tables": ["core_backup.coopeg_installment_data", "core_backup.coopeg_installment_invoices"], "domain": "core_engine"}
+{"id": 13, "question": "Show monthly recurring subscription fees per plan", "expected_tables": ["core_backup.coopeg_services"], "domain": "core_oms"}
+{"id": 14, "question": "What are the active mediation control parameters?", "expected_tables": ["core_backup.coopeg_service_provision"], "domain": "core_mediation"}
+{"id": 15, "question": "List total deferred revenue allocations by quarter", "expected_tables": ["core_backup.revenue_journal_tmp"], "domain": "core_revenue"}
+{"id": 16, "question": "Show electricity meter reading values for January 2026", "expected_tables": ["core_usage.service_usage_readings"], "domain": "core_usage"}
+{"id": 17, "question": "List customer accounts in suspended status", "expected_tables": ["core_backup.saray_accounts", "core_backup.coopeg_users"], "domain": "core_engine"}
+{"id": 18, "question": "Show invoice total amount and tax amount by bill unit", "expected_tables": ["core_backup.coopeg_invoice_summary", "core_backup.bill_unit_tmp"], "domain": "core_engine"}
+{"id": 19, "question": "Find order service plan prices and rate cards", "expected_tables": ["core_backup.coopeg_services"], "domain": "core_pricing"}
+{"id": 20, "question": "Show system collection profiles and GL range mappings", "expected_tables": ["core_config.account_collection_profile_map"], "domain": "core_config"}

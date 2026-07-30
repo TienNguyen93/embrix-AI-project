@@ -31,13 +31,13 @@ chroma_db/
 Thumbs.db
 
 # Agent state
-.agents/
+# .agents/
 # Documentation & Diagrams
 architecture.md
 flow_diagram.png
 sample_questions.md
 
-/SQL-agentic-web-app/
+AGENTS.MD
 
 # Embrix-AI-agent generated SQL/scratch scripts
 Embrix-AI-agent/detailed_schema_lookup.py
