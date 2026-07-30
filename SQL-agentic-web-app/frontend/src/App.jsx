@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Send, PlusCircle, Database, MessageSquare, Edit2, Play, ChevronDown, Trash2 } from 'lucide-react';
+import { Send, PlusCircle, Database, MessageSquare, Edit2, Play, ChevronDown, Trash2, Cpu, Sparkles, Check } from 'lucide-react';
+
 import './App.css';
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
 
-const API_BASE = 'http://localhost:8001';
+const API_BASE = 'http://localhost:8000';
 const SCHEMA_NAME = 'core_usage'; // Hardcoded for demo
+
 
 function ChatChart({ spec, data }) {
   if (!spec || !data || data.length === 0) return null;
@@ -132,6 +134,13 @@ function SqlEditor({ initialSql, onRerun, disabled }) {
   );
 }
 
+const AVAILABLE_MODELS = [
+  { id: 'gemini-3.1-flash-lite', name: 'Gemini 3.1 Flash Lite', badge: 'Primary', badgeBg: '#e0e7ff', badgeColor: '#3730a3', desc: '15 RPM | 250k TPM | 500 RPD (Fastest)' },
+  { id: 'gemini-3-flash', name: 'Gemini 3 Flash', badge: 'Balanced', badgeBg: '#ecfdf5', badgeColor: '#065f46', desc: '5 RPM | 250k TPM | 20 RPD' },
+  { id: 'gemini-2.5-flash-lite', name: 'Gemini 2.5 Flash Lite', badge: 'Tertiary', badgeBg: '#fef3c7', badgeColor: '#92400e', desc: '10 RPM | 250k TPM | 20 RPD' },
+  { id: 'qwen3.5-ollama', name: 'Qwen 3.5 (Local Ollama)', badge: 'Local 0-Cost', badgeBg: '#f3e8ff', badgeColor: '#6b21a8', desc: 'Local inference on http://localhost:11434' },
+];
+
 function App() {
   const [sessions, setSessions] = useState([]);
   const [currentSessionId, setCurrentSessionId] = useState(null);
@@ -143,6 +152,9 @@ function App() {
   const [emptyTables, setEmptyTables] = useState([]);
   const [showEmptyTables, setShowEmptyTables] = useState(false);
   const [suggestedQuestions, setSuggestedQuestions] = useState([]);
+  const [selectedModel, setSelectedModel] = useState(AVAILABLE_MODELS[0]);
+  const [showModelsMenu, setShowModelsMenu] = useState(false);
+
   
   const messagesEndRef = useRef(null);
 
@@ -185,29 +197,45 @@ function App() {
   const fetchSessions = async () => {
     try {
       const res = await axios.get(`${API_BASE}/sessions`);
-      setSessions(res.data);
-      if (res.data.length > 0 && !currentSessionId) {
-        setCurrentSessionId(res.data[0].id);
-      } else if (res.data.length === 0) {
+      if (res.data && res.data.length > 0) {
+        setSessions(res.data);
+        if (!currentSessionId) {
+          setCurrentSessionId(res.data[0].id);
+        }
+      } else {
         createSession();
       }
     } catch (error) {
-      console.error("Error fetching sessions:", error);
+      console.error("Error fetching sessions from API:", error);
+      // Fallback local session if server starting
+      const fallbackId = 'sess_' + Date.now();
+      const fallbackSession = { id: fallbackId, title: "New Analytics Chat" };
+      setSessions([fallbackSession]);
+      setCurrentSessionId(fallbackId);
     }
   };
 
   const createSession = async () => {
     try {
       const res = await axios.post(`${API_BASE}/sessions`, { title: "New Analytics Chat" });
-      setCurrentSessionId(res.data.session_id);
+      const newSid = res.data.session_id;
+      setCurrentSessionId(newSid);
       setMessages([]);
       setActiveMessageId(null);
       fetchSessions();
       setShowSessionsMenu(false);
     } catch (error) {
-      console.error("Error creating session:", error);
+      console.error("Error creating session via API:", error);
+      const fallbackId = 'sess_' + Date.now();
+      const fallbackSession = { id: fallbackId, title: "New Analytics Chat" };
+      setSessions(prev => [fallbackSession, ...prev]);
+      setCurrentSessionId(fallbackId);
+      setMessages([]);
+      setActiveMessageId(null);
+      setShowSessionsMenu(false);
     }
   };
+
 
   const deleteSession = async (sid, e) => {
     e.stopPropagation();
@@ -266,8 +294,10 @@ function App() {
         fetchSessions();
       } catch (err) {
         console.error("Error creating session on the fly:", err);
-        return;
+        activeSid = 'sess_' + Date.now();
+        setCurrentSessionId(activeSid);
       }
+
     }
 
     const query = inputValue;
@@ -280,8 +310,10 @@ function App() {
       const res = await axios.post(`${API_BASE}/query`, {
         session_id: activeSid,
         question: query,
-        schema_name: SCHEMA_NAME
+        schema_name: SCHEMA_NAME,
+        preferred_model: selectedModel.id
       });
+
       
       let parsedData = null;
       try {
@@ -398,53 +430,110 @@ function App() {
           )}
         </div>
         
-        <div className="sessions-dropdown-container">
-          <button 
-            className="sessions-dropdown-btn" 
-            onClick={() => setShowSessionsMenu(!showSessionsMenu)}
-          >
-            <MessageSquare size={16} />
-            {currentSession ? currentSession.title : "Select Session"}
-            <ChevronDown size={16} />
-          </button>
-          
-          {showSessionsMenu && (
-            <div className="sessions-menu">
-              {sessions.map(s => (
-                <div 
-                  key={s.id} 
-                  className={`history-item ${currentSessionId === s.id ? 'active' : ''}`}
-                  onClick={() => {
-                    setCurrentSessionId(s.id);
-                    setShowSessionsMenu(false);
-                  }}
-                  style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', overflow: 'hidden' }}>
-                    <MessageSquare size={14} />
-                    <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {s.title}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          {/* Model Selector Dropdown */}
+          <div className="sessions-dropdown-container">
+            <button 
+              className="sessions-dropdown-btn" 
+              onClick={() => {
+                setShowModelsMenu(!showModelsMenu);
+                setShowSessionsMenu(false);
+              }}
+              style={{ background: 'var(--accent-bg)', borderColor: 'var(--accent-primary)', color: 'var(--accent-primary)' }}
+              title="Select LLM Engine Model"
+            >
+              <Cpu size={16} />
+              <span>{selectedModel.name}</span>
+              <ChevronDown size={16} style={{ transform: showModelsMenu ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s ease' }} />
+            </button>
+            
+            {showModelsMenu && (
+              <div className="sessions-menu" style={{ width: '310px' }}>
+                <div style={{ padding: '0.5rem 0.75rem', fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em', borderBottom: '1px solid var(--border-light)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <Sparkles size={12} color="var(--accent-primary)" />
+                  Select LLM Model Engine
+                </div>
+                {AVAILABLE_MODELS.map(m => (
+                  <div 
+                    key={m.id} 
+                    className={`history-item ${selectedModel.id === m.id ? 'active' : ''}`}
+                    onClick={() => {
+                      setSelectedModel(m);
+                      setShowModelsMenu(false);
+                    }}
+                    style={{ padding: '0.6rem 0.75rem', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.85rem' }}>{m.name}</span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                        <span style={{ fontSize: '0.65rem', padding: '2px 6px', borderRadius: '10px', background: m.badgeBg, color: m.badgeColor, fontWeight: 700 }}>
+                          {m.badge}
+                        </span>
+                        {selectedModel.id === m.id && <Check size={14} color="var(--accent-primary)" />}
+                      </div>
+                    </div>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>
+                      {m.desc}
                     </span>
                   </div>
-                  <button 
-                    onClick={(e) => deleteSession(s.id, e)}
-                    style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#9ca3af', padding: '2px', display: 'flex' }}
-                    title="Delete Chat"
-                    onMouseEnter={(e) => e.currentTarget.style.color = '#ef4444'}
-                    onMouseLeave={(e) => e.currentTarget.style.color = '#9ca3af'}
-                  >
-                    <Trash2 size={14} />
-                  </button>
-                </div>
-              ))}
-              <div className="history-item new-chat-item" onClick={createSession}>
-                <PlusCircle size={14} />
-                New Chat
+                ))}
               </div>
-            </div>
-          )}
+            )}
+          </div>
+
+          {/* Sessions Dropdown */}
+          <div className="sessions-dropdown-container">
+            <button 
+              className="sessions-dropdown-btn" 
+              onClick={() => {
+                setShowSessionsMenu(!showSessionsMenu);
+                setShowModelsMenu(false);
+              }}
+            >
+              <MessageSquare size={16} />
+              {currentSession ? currentSession.title : "Select Session"}
+              <ChevronDown size={16} style={{ transform: showSessionsMenu ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s ease' }} />
+            </button>
+            
+            {showSessionsMenu && (
+              <div className="sessions-menu">
+                {sessions.map(s => (
+                  <div 
+                    key={s.id} 
+                    className={`history-item ${currentSessionId === s.id ? 'active' : ''}`}
+                    onClick={() => {
+                      setCurrentSessionId(s.id);
+                      setShowSessionsMenu(false);
+                    }}
+                    style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', overflow: 'hidden' }}>
+                      <MessageSquare size={14} />
+                      <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {s.title}
+                      </span>
+                    </div>
+                    <button 
+                      onClick={(e) => deleteSession(s.id, e)}
+                      style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#9ca3af', padding: '2px', display: 'flex' }}
+                      title="Delete Chat"
+                      onMouseEnter={(e) => e.currentTarget.style.color = '#ef4444'}
+                      onMouseLeave={(e) => e.currentTarget.style.color = '#9ca3af'}
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
+                ))}
+                <div className="history-item new-chat-item" onClick={createSession}>
+                  <PlusCircle size={14} />
+                  New Chat
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </header>
+
 
       {/* Split Workspace */}
       <div className="workspace">
