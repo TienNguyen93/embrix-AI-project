@@ -1,4 +1,4 @@
 # Embrix Conversational Analytics
 
-Visit [agent-app](file:///C:/Users/nguye/Documents/antigravity/keen-einstein/agent-app/README.md) for active application development.
+Visit [agent-app](agent-app/) for active application development.
 
